@@ -1,0 +1,48 @@
+{
+  "name": "rpg-game",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --watch tools/ --delay 1500ms --exec babel-node tools/run start"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "copy-webpack-plugin": "^4.0.1",
+    "noisejs": "^2.1.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-eslint": "^6.1.2",
+    "babel-loader": "^7.0.0",
+    "babel-plugin-module-resolver": "^2.7.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-env": "^1.5.2",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-runtime": "^6.23.0",
+    "css-loader": "^0.28.4",
+    "eslint": "^2.7.0",
+    "eslint-config-airbnb": "^6.2.0",
+    "eslint-loader": "^1.5.0",
+    "eslint-plugin-babel": "^3.2.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-jsx-control-statements": "^2.1.1",
+    "eslint-plugin-react": "^4.2.3",
+    "file-loader": "^0.11.2",
+    "image-webpack-loader": "^3.3.1",
+    "node-sass": "^4.5.3",
+    "nodemon": "^1.11.0",
+    "react-a11y": "^0.3.4",
+    "sass-loader": "^6.0.6",
+    "shelljs": "^0.7.8",
+    "style-loader": "^0.18.2",
+    "url-loader": "^0.5.9",
+    "webpack": "^2.6.1",
+    "webpack-hot-middleware": "^2.18.0",
+    "webpack-middleware": "^1.5.1"
+  }
+}

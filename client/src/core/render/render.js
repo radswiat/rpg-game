@@ -109,6 +109,21 @@ export default class Render {
     this.layers.foreground.clearRect(0, 0, window.innerWidth, window.innerHeight);
   }
 
+  renderFluid({object, x, y}) {
+    let spriteLocation = spritesHelper.getLocation(object.sprite);
+
+    this.layers.background.drawImage(
+      this.textures[object.texture],
+      spriteLocation[0],
+      spriteLocation[1],
+      64,
+      32,
+      ...this.camera.handleCoordsLocation(x, y),
+      64,
+      32
+    );
+  }
+
   renderTile({texture, sprite, x, y, highlight}) {
     let spriteLocation = spritesHelper.getLocation(sprite);
 
@@ -124,8 +139,8 @@ export default class Render {
     );
 
     // debugging
-    let dLocations = this.camera.handleCoordsLocation(x, y);
-    this.layers.background.fillText(`${x}:${y}`, dLocations[0] -10, dLocations[1] + 3);
+    // let dLocations = this.camera.handleCoordsLocation(x, y);
+    // this.layers.background.fillText(`${x}:${y}`, dLocations[0] -10, dLocations[1] + 3);
   }
 
   renderObject({texture, sprite, x, y}) {

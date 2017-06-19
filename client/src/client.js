@@ -6,6 +6,8 @@ import { IsometricCamera } from 'core/camera/camera';
 import engine from 'core/engine/engine';
 import Player from 'core/entities/player';
 
+import World from 'components/world/world';
+
 /**
  * Main game class
  */
@@ -27,6 +29,8 @@ class Game {
   async initialize() {
     await this.initializeComponents();
     this.initializeWorld();
+    this.addPlayerCharacter();
+    this.addMouseListener();
     this.startGame();
   }
 
@@ -53,34 +57,13 @@ class Game {
    * - entities
    */
   initializeWorld() {
-    this.createWorld();
-    this.createObjects();
-    this.createEntities();
+    this.world = new World(this.seed);
   }
 
-  /**
-   * Create world
-   * - create world grid
-   */
-  createWorld() {
-    this.tiles = [];
-    for (let x = 0; x < 60; x++) {
-      if (typeof this.tiles[x] === 'undefined') {
-        this.tiles[x] = [];
-      }
-      for(let y = 0; y < 60; y++) {
-        this.tiles[x][y] = {
-          texture: 'layer0',
-          sprite: Math.random() * (420 - 408) + 408,
-          x,
-          y
-        }
-      }
-    }
-
+  addMouseListener() {
     this.render.onEvent('mousemove', ({ x, y }) => {
-      if (typeof this.tiles[x] !== 'undefined') {
-        if (typeof this.tiles[x][y] !== 'undefined') {
+      if (typeof this.world.tiles[x] !== 'undefined') {
+        if (typeof this.world.tiles[x][y] !== 'undefined') {
           this.mouseTile = {
             x, y
           };
@@ -89,34 +72,10 @@ class Game {
     })
   }
 
-  /**
-   * Place objects on the grid
-   * - like trees ...
-   */
-  createObjects() {
-    let mod = 2;
-    this.objects = [];
-    for (let x = 0; x < 60; x++) {
-      if (typeof this.objects[x] === 'undefined') {
-        this.objects[x] = [];
-      }
-      for(let y = 0; y < 60; y++) {
-        if (this.seed.perlin2(x / mod, y / mod) > 0.55) {
-          this.objects[x][y] = {
-            texture: 'layer1',
-            sprite: this.seed.perlin2(x / mod + 10, y / mod + 10) < -0.12 ? 0 : 1,
-            x,
-            y
-          }
-        }
-      }
-    }
-  }
-
-  createEntities() {
-    this.entities = [];
-    this.entities[30] = [];
-    this.entities[30][30] = new Player(30, 30);
+  addPlayerCharacter() {
+    this.world.entities = [];
+    this.world.entities[30] = [];
+    this.world.entities[30][30] = new Player(30, 30);
   }
 
   /**
@@ -127,7 +86,14 @@ class Game {
   startGame() {
     engine.onHeartbeat(() => {
       this.render.renderClear();
-      this.tiles.map((o) => {
+
+      this.world.fluids.map((o) => {
+        o.map((fluidTile) => {
+          this.render.renderFluid(fluidTile);
+        })
+      });
+
+      this.world.tiles.map((o) => {
         o.map((tile) => {
           this.render.renderTile({
             texture: tile.texture,
@@ -142,7 +108,7 @@ class Game {
         this.render.renderMouseCursor(this.mouseTile)
       }
 
-      this.objects.map((o) => {
+      this.world.objects.map((o) => {
         o.map((object) => {
           this.render.renderObject({
             texture: 'layer1',
@@ -153,7 +119,7 @@ class Game {
         });
       });
 
-      this.entities.map((o) => {
+      this.world.entities.map((o) => {
         o.map((entity) => {
           this.render.renderEntity(entity)
         });

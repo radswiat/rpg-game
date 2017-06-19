@@ -1,8 +1,10 @@
 export class Engine {
 
   actions = [];
+  temporaryActions = [];
   then = 0;
   fpsInterval = 1000 / 30;
+  tickCount = 0;
 
   constructor() {
     this._tick();
@@ -34,9 +36,14 @@ export class Engine {
    * @private
    */
   _tick() {
-    let timestamp = new Date().getTime();
+    let tickCount = this.tickCount++;
     for (let action of this.actions) {
-      action(timestamp);
+      action(tickCount);
+    }
+    for (let [index, action] of this.temporaryActions.entries()) {
+      if(action(tickCount)) {
+        this.temporaryActions.splice(index, 1);
+      }
     }
     this._shouldEngineTick();
   }
@@ -47,6 +54,10 @@ export class Engine {
    */
   onHeartbeat(cb) {
     this.actions.push(cb);
+  }
+
+  tillEnd(cb) {
+    this.temporaryActions.push(cb);
   }
 }
 

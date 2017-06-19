@@ -8,3 +8,7 @@ export async function loadImage(imagePath) {
     };
   });
 }
+
+export function every(mod, value) {
+  return value % mod === 0;
+}

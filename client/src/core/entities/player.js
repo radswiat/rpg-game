@@ -1,15 +1,17 @@
 import Entity from './entity';
 import engine from 'core/engine/engine';
-var inputs = require('game-inputs')( window )
+import { every } from 'core/utils/utils';
+var inputs = require('game-inputs')( window );
 
 export default class Player extends Entity {
   texture = 'playerbody';
-  spriteLocation = [160, 285];
-  spriteSize = [34, 56];
+  spriteLocation = [154, 283];
+  spriteSize = [36, 56];
+  spriteFix = [15, 0];
 
   // states/
   isWalking = false;
-  direction = null;
+  isWalkingSequence = false;
   walkSequence = 0;
 
   constructor(x, y) {
@@ -64,26 +66,41 @@ export default class Player extends Entity {
 
   _walk() {
     if (this.isWalking) {
-      this.x = this.x - ( 1 * this.isWalkingX);
-      this.y = this.y - ( 1 * this.isWalkingY);
-      this._walkAnimate();
+      this._walkSequence();
     }
   }
 
-  _walkAnimate() {
-    if (this.walkSequence >= 7) {
-      this.walkSequence = 0;
+  _walkSequence() {
+    // if sequence in progress,
+    // don't start new one
+    if (this.isWalkingSequence) {
+      return;
     }
-    this.spriteLocation = this.animationStates.walkRight[this.walkSequence];
-    this.spriteLocation = this.animationStates.walkRight[this.walkSequence];
-    this.walkSequence++;
+    this.isWalkingSequence = true;
+
+    engine.tillEnd((tick) => {
+      if (every(2, tick)) {
+        if (this.walkSequence > 6) {
+          this.walkSequence = 0;
+          this.isWalkingSequence = false;
+          this.x = Math.round(this.x);
+          this.y = Math.round(this.y);
+          return true;
+        }
+        this.x = this.x - ( (1 / 7) * this.isWalkingX);
+        this.y = this.y - ( (1 / 7) * this.isWalkingY);
+        this.spriteLocation = this.animationStates.walkRight[this.walkSequence];
+        this.walkSequence++;
+      }
+    });
   }
 
-  getAnimationFrame(row, number) {
-
-  }
 
   animationStates = {
-    walkRight: [[159, 284], [824, 284], [864, 284],[7, 343], [44, 343], [84, 343], [122, 343]],
+    walkRight: [
+      [154, 283], [40, 339],
+      [821, 283], [861, 283], [905, 283], [950, 283],
+      [154, 283]
+    ],
   }
 }

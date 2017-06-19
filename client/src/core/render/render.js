@@ -112,10 +112,6 @@ export default class Render {
   renderTile({texture, sprite, x, y, highlight}) {
     let spriteLocation = spritesHelper.getLocation(sprite);
 
-    if (highlight) {
-      spriteLocation = [455, 368];
-    }
-
     this.layers.background.drawImage(
       this.textures[texture],
       spriteLocation[0],
@@ -151,13 +147,27 @@ export default class Render {
     );
   }
 
-  renderEntity({texture, spriteLocation, spriteSize, x, y}) {
+  renderEntity({texture, spriteLocation, spriteSize, spriteFix, x, y}) {
     this.layers.entities.drawImage(
       this.textures[texture],
       ...spriteLocation,
       ...spriteSize,
-      ...this.camera.handleCoordsLocation(x, y),
+      ...this.camera.handleCoordsLocation(x, y, spriteFix),
       ...spriteSize,
+    );
+  }
+
+  renderMouseCursor({ x, y }) {
+    let spriteLocation = [455, 368];
+    this.layers.background.drawImage(
+      this.textures['layer0'],
+      spriteLocation[0],
+      spriteLocation[1],
+      64,
+      32,
+      ...this.camera.handleCoordsLocation(x, y),
+      64,
+      32
     );
   }
 }

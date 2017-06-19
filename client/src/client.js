@@ -81,7 +81,9 @@ class Game {
     this.render.onEvent('mousemove', ({ x, y }) => {
       if (typeof this.tiles[x] !== 'undefined') {
         if (typeof this.tiles[x][y] !== 'undefined') {
-          this.tiles[x][y].highlight = true;
+          this.mouseTile = {
+            x, y
+          };
         }
       }
     })
@@ -131,12 +133,14 @@ class Game {
             texture: tile.texture,
             sprite: tile.sprite,
             x: tile.x,
-            y: tile.y,
-            highlight: tile.highlight
+            y: tile.y
           });
-          tile.highlight = false;
         })
       });
+
+      if (this.mouseTile) {
+        this.render.renderMouseCursor(this.mouseTile)
+      }
 
       this.objects.map((o) => {
         o.map((object) => {
@@ -154,6 +158,7 @@ class Game {
           this.render.renderEntity(entity)
         });
       });
+
     });
   }
 }

@@ -20,9 +20,9 @@ export default class IsometricCamera {
     return {x : (_x * 64 / 2), y: (_y * 31 / 2)};
   }
 
-  handleCoordsLocation(_x, _y) {
+  handleCoordsLocation(_x, _y, spriteFix = [0,0]) {
     let {x, y} = IsometricCamera.toIso(_x, _y);
-    return [x + this.x, y + this.y];
+    return [x + this.x + spriteFix[0], y + this.y + spriteFix[1]];
   }
 
   userCameraControls() {

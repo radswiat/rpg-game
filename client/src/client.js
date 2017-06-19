@@ -1,8 +1,10 @@
 import Render from 'core/render/render';
-import { IsometricCamera } from 'core/camera/camera';
-import Engine from 'core/engine/engine';
 import { Noise } from 'noisejs';
 import 'resources/scss/main.scss';
+
+import { IsometricCamera } from 'core/camera/camera';
+import engine from 'core/engine/engine';
+import Player from 'core/entities/player';
 
 /**
  * Main game class
@@ -33,7 +35,6 @@ class Game {
    * @returns {Promise.<void>}
    */
   async initializeComponents() {
-    this.engine = new Engine();
     this.camera = new IsometricCamera({
       x: 600,
       y: -400
@@ -62,13 +63,13 @@ class Game {
    * - create world grid
    */
   createWorld() {
-    this.world = [];
+    this.tiles = [];
     for (let x = 0; x < 60; x++) {
-      if (typeof this.world[x] === 'undefined') {
-        this.world[x] = [];
+      if (typeof this.tiles[x] === 'undefined') {
+        this.tiles[x] = [];
       }
       for(let y = 0; y < 60; y++) {
-        this.world[x][y] = {
+        this.tiles[x][y] = {
           texture: 'layer0',
           sprite: Math.random() * (420 - 408) + 408,
           x,
@@ -76,6 +77,14 @@ class Game {
         }
       }
     }
+
+    this.render.onEvent('mousemove', ({ x, y }) => {
+      if (typeof this.tiles[x] !== 'undefined') {
+        if (typeof this.tiles[x][y] !== 'undefined') {
+          this.tiles[x][y].highlight = true;
+        }
+      }
+    })
   }
 
   /**
@@ -102,7 +111,11 @@ class Game {
     }
   }
 
-  createEntities() {}
+  createEntities() {
+    this.entities = [];
+    this.entities[30] = [];
+    this.entities[30][30] = new Player(30, 30);
+  }
 
   /**
    * Start game
@@ -110,16 +123,18 @@ class Game {
    * - register every frame action
    */
   startGame() {
-    this.engine.onHeartbeat(() => {
+    engine.onHeartbeat(() => {
       this.render.renderClear();
-      this.world.map((o) => {
-        o.map((l) => {
+      this.tiles.map((o) => {
+        o.map((tile) => {
           this.render.renderTile({
-            texture: l.texture,
-            sprite: l.sprite,
-            x: l.x,
-            y: l.y
+            texture: tile.texture,
+            sprite: tile.sprite,
+            x: tile.x,
+            y: tile.y,
+            highlight: tile.highlight
           });
+          tile.highlight = false;
         })
       });
 
@@ -131,6 +146,12 @@ class Game {
             x: object.x,
             y: object.y
           })
+        });
+      });
+
+      this.entities.map((o) => {
+        o.map((entity) => {
+          this.render.renderEntity(entity)
         });
       });
     });

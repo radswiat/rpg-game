@@ -10,6 +10,7 @@ export default class Render {
   constructor({ camera }) {
     this.camera = camera;
     this.initialize();
+    this._mouseMoveEvents();
   }
 
   /**
@@ -63,12 +64,58 @@ export default class Render {
     this.textures = await allTextures;
   }
 
-  renderClear() {
-    this.layers.background.clearRect(0, 0, window.innerWidth, window.innerHeight);
+  _mouseMoveEvents() {
+    document.onmousemove = ({ clientX, clientY }) => {
+      let x, y, _x, _y;
+
+      x = clientX ;
+      y = clientY ;
+
+      x = x - this.camera.x;
+      y = y - this.camera.y;
+
+      _x = (2 * y + x) / 2;
+      _y = (2 * y - x) / 2;
+
+      _x = ( _x / 64 ) * 2 ;
+      _y = ( _y / 31 ) ;
+
+      _x = Math.round(_x);
+      _y = Math.round(_y);
+
+      if (this.events['mousemove']) {
+        for (let event of this.events['mousemove']) {
+          if (typeof event === 'function') {
+            event({ x: _x, y: _y})
+          }
+        }
+      }
+    }
   }
 
-  renderTile({texture, sprite, x, y}) {
+  onEvent(eventName, cb) {
+    if (typeof this.events === 'undefined') {
+      this.events = {};
+    }
+    if (typeof this.events[eventName] === 'undefined') {
+      this.events[eventName] = [];
+    }
+    this.events[eventName].push(cb);
+  }
+
+  renderClear() {
+    this.layers.background.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    this.layers.entities.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    this.layers.foreground.clearRect(0, 0, window.innerWidth, window.innerHeight);
+  }
+
+  renderTile({texture, sprite, x, y, highlight}) {
     let spriteLocation = spritesHelper.getLocation(sprite);
+
+    if (highlight) {
+      spriteLocation = [455, 368];
+    }
+
     this.layers.background.drawImage(
       this.textures[texture],
       spriteLocation[0],
@@ -79,6 +126,10 @@ export default class Render {
       64,
       32
     );
+
+    // debugging
+    let dLocations = this.camera.handleCoordsLocation(x, y);
+    this.layers.background.fillText(`${x}:${y}`, dLocations[0] -10, dLocations[1] + 3);
   }
 
   renderObject({texture, sprite, x, y}) {
@@ -92,6 +143,16 @@ export default class Render {
       spriteSize = [150, 207];
     }
     this.layers.background.drawImage(
+      this.textures[texture],
+      ...spriteLocation,
+      ...spriteSize,
+      ...this.camera.handleCoordsLocation(x, y),
+      ...spriteSize,
+    );
+  }
+
+  renderEntity({texture, spriteLocation, spriteSize, x, y}) {
+    this.layers.entities.drawImage(
       this.textures[texture],
       ...spriteLocation,
       ...spriteSize,

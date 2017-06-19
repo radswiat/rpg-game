@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "copy-webpack-plugin": "^4.0.1",
+    "game-inputs": "^0.2.2",
     "noisejs": "^2.1.0"
   },
   "devDependencies": {

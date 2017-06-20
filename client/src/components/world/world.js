@@ -1,4 +1,5 @@
 import WaterTile from 'components/tiles/water';
+import NPC from 'components/entities/npc';
 
 export default class World {
 
@@ -49,7 +50,18 @@ export default class World {
   }
 
   _createEntities() {
-
+    let mod = 2;
+    this.entities = [];
+    for (let x = 0; x < 60; x++) {
+      if (typeof this.entities[x] === 'undefined') {
+        this.entities[x] = [];
+      }
+      for(let y = 0; y < 60; y++) {
+        if (this.seed.perlin2(x / mod, y / mod) > 0.65) {
+          this.entities[x][y] = new NPC(x, y);
+        }
+      }
+    }
   }
 
   _createFluids() {

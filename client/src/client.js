@@ -4,7 +4,7 @@ import 'resources/scss/main.scss';
 
 import { IsometricCamera } from 'core/camera/camera';
 import engine from 'core/engine/engine';
-import Player from 'core/entities/player';
+import Player from 'components/entities/player';
 
 import World from 'components/world/world';
 
@@ -73,8 +73,6 @@ class Game {
   }
 
   addPlayerCharacter() {
-    this.world.entities = [];
-    this.world.entities[30] = [];
     this.world.entities[30][30] = new Player(30, 30);
   }
 
@@ -84,6 +82,7 @@ class Game {
    * - register every frame action
    */
   startGame() {
+    console.warn(this.world.entities);
     engine.onHeartbeat(() => {
       this.render.renderClear();
 

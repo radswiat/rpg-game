@@ -1,9 +1,15 @@
+import Stats from 'core/helpers/stats';
+
+var stats = new Stats();
+stats.showPanel( 0 ); // 0: fps, 1: ms, 2: mb, 3+: custom
+document.body.appendChild( stats.dom );
+
 export class Engine {
 
   actions = [];
   temporaryActions = [];
   then = 0;
-  fpsInterval = 1000 / 30;
+  fpsInterval = 1000 / 34;
   tickCount = 0;
 
   constructor() {
@@ -36,6 +42,7 @@ export class Engine {
    * @private
    */
   _tick() {
+    stats.begin();
     let tickCount = this.tickCount++;
     for (let action of this.actions) {
       action(tickCount);
@@ -45,6 +52,7 @@ export class Engine {
         this.temporaryActions.splice(index, 1);
       }
     }
+    stats.end();
     this._shouldEngineTick();
   }
 

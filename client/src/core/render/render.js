@@ -109,6 +109,42 @@ export default class Render {
     this.layers.foreground.clearRect(0, 0, window.innerWidth, window.innerHeight);
   }
 
+  renderWorld(world, mouse) {
+
+    // render fluids
+    world.fluids.map((o) => {
+      o.map((fluidTile) => {
+        this.renderFluid(fluidTile);
+      })
+    });
+
+    // render tiles
+    world.tiles.map((o) => {
+      o.map((tile) => {
+        this.renderTile(tile);
+      })
+    });
+
+    // render mouse events
+    if (mouse) {
+      this.renderMouseCursor(mouse)
+    }
+
+    // render objects
+    world.objects.map((o) => {
+      o.map((object) => {
+        this.renderObject(object)
+      });
+    });
+
+    // render entities
+    world.entities.map((o) => {
+      o.map((entity) => {
+        this.renderEntity(entity)
+      });
+    });
+  }
+
   renderFluid({object, x, y}) {
     let spriteLocation = spritesHelper.getLocation(object.sprite);
 
@@ -124,11 +160,11 @@ export default class Render {
     );
   }
 
-  renderTile({texture, sprite, x, y, highlight}) {
-    let spriteLocation = spritesHelper.getLocation(sprite);
+  renderTile({asset, x, y}) {
+    let spriteLocation = spritesHelper.getLocation(asset.sprite);
 
     this.layers.background.drawImage(
-      this.textures[texture],
+      this.textures[asset.texture],
       spriteLocation[0],
       spriteLocation[1],
       64,
@@ -143,10 +179,10 @@ export default class Render {
     // this.layers.background.fillText(`${x}:${y}`, dLocations[0] -10, dLocations[1] + 3);
   }
 
-  renderObject({texture, sprite, x, y}) {
+  renderObject({asset, x, y}) {
     let spriteLocation;
     let spriteSize;
-    if (sprite === 0) {
+    if (asset.sprite === 0) {
       spriteLocation = [412, 0];
       spriteSize = [168, 207];
     } else {
@@ -154,7 +190,7 @@ export default class Render {
       spriteSize = [150, 207];
     }
     this.layers.background.drawImage(
-      this.textures[texture],
+      this.textures[asset.texture],
       ...spriteLocation,
       ...spriteSize,
       ...this.camera.handleCoordsLocation(x, y),

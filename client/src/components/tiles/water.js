@@ -2,6 +2,7 @@ import engine from 'core/engine/engine';
 import { every } from 'core/utils/utils';
 
 class Water {
+
   texture = 'layer0';
   sprite = 368;
   sequence = 0;

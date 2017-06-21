@@ -1,5 +1,6 @@
 import engine from 'core/engine/engine';
 import { every } from 'core/utils/utils';
+import game from 'core/game/game';
 
 export default class Entities {
 
@@ -29,6 +30,13 @@ export default class Entities {
     if (this.isWalkingSequence) {
       return;
     }
+
+    // can move?
+    if (!game.canMove(this.x + 1, this.y + 1)) {
+      console.log('cant move');
+      return;
+    }
+
     this.isWalkingSequence = true;
     let isWalkingX = this.isWalkingX;
     let isWalkingY = this.isWalkingY;

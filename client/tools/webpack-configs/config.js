@@ -20,7 +20,8 @@ export const aliasConfig = {
   core: './core',
   store: './store',
   pages: './pages',
-  resources: './resources'
+  resources: './resources',
+  assets: './assets'
 };
 
 export const webpackConfig = {

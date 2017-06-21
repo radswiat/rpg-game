@@ -1,5 +1,6 @@
 import WaterTile from 'components/tiles/water';
 import NPC from 'components/entities/npc';
+import assets from 'assets/assets';
 
 export default class World {
 
@@ -20,10 +21,9 @@ export default class World {
       }
       for(let y = 0; y < 60; y++) {
         this.tiles[x][y] = {
-          texture: 'layer0',
-          sprite: Math.random() * (420 - 408) + 408,
           x,
-          y
+          y,
+          asset: assets.use(assets.tiles.grass)
         }
       }
     }
@@ -39,10 +39,12 @@ export default class World {
       for(let y = 0; y < 60; y++) {
         if (this.seed.perlin2(x / mod, y / mod) > 0.55) {
           this.objects[x][y] = {
-            texture: 'layer1',
-            sprite: this.seed.perlin2(x / mod + 10, y / mod + 10) < -0.12 ? 0 : 1,
             x,
-            y
+            y,
+            asset: {
+              texture: 'layer1',
+              sprite: this.seed.perlin2(x / mod + 10, y / mod + 10) < -0.12 ? 0 : 1,
+            }
           }
         }
       }
@@ -82,67 +84,67 @@ export default class World {
 
   _tempCreateLake() {
     // bottom
-    this.tiles[29][26].sprite = 340;
-    this.tiles[30][26].sprite = 340;
-    this.tiles[31][26].sprite = 340;
+    this.tiles[29][26].asset.sprite = 340;
+    this.tiles[30][26].asset.sprite = 340;
+    this.tiles[31][26].asset.sprite = 340;
     // corner
-    this.tiles[32][26].sprite = 346;
+    this.tiles[32][26].asset.sprite = 346;
     // right
-    this.tiles[32][25].sprite = 344;
-    this.tiles[32][24].sprite = 344;
+    this.tiles[32][25].asset.sprite = 344;
+    this.tiles[32][24].asset.sprite = 344;
     // corner
-    this.tiles[32][23].sprite = 348;
+    this.tiles[32][23].asset.sprite = 348;
     // top
-    this.tiles[31][23].sprite = 334;
-    this.tiles[30][23].sprite = 334;
-    this.tiles[29][23].sprite = 334;
+    this.tiles[31][23].asset.sprite = 334;
+    this.tiles[30][23].asset.sprite = 334;
+    this.tiles[29][23].asset.sprite = 334;
     // inner corner
-    this.tiles[28][23].sprite = 349;
+    this.tiles[28][23].asset.sprite = 349;
     // right
-    this.tiles[28][22].sprite = 344;
+    this.tiles[28][22].asset.sprite = 344;
     // corner
-    this.tiles[28][21].sprite = 348;
+    this.tiles[28][21].asset.sprite = 348;
     // top
-    this.tiles[27][21].sprite = 334;
-    this.tiles[26][21].sprite = 334;
-    this.tiles[25][21].sprite = 334;
+    this.tiles[27][21].asset.sprite = 334;
+    this.tiles[26][21].asset.sprite = 334;
+    this.tiles[25][21].asset.sprite = 334;
     // corner
-    this.tiles[24][21].sprite = 345;
+    this.tiles[24][21].asset.sprite = 345;
     // left-top
-    this.tiles[24][22].sprite = 337;
-    this.tiles[24][23].sprite = 337;
-    this.tiles[24][24].sprite = 337;
-    this.tiles[24][25].sprite = 337;
+    this.tiles[24][22].asset.sprite = 337;
+    this.tiles[24][23].asset.sprite = 337;
+    this.tiles[24][24].asset.sprite = 337;
+    this.tiles[24][25].asset.sprite = 337;
     // corner
-    this.tiles[24][26].sprite = 347;
+    this.tiles[24][26].asset.sprite = 347;
     // bottom
-    this.tiles[25][26].sprite = 340;
-    this.tiles[26][26].sprite = 340;
-    this.tiles[27][26].sprite = 340;
-    this.tiles[28][26].sprite = 340;
+    this.tiles[25][26].asset.sprite = 340;
+    this.tiles[26][26].asset.sprite = 340;
+    this.tiles[27][26].asset.sprite = 340;
+    this.tiles[28][26].asset.sprite = 340;
     // fill
-    this.tiles[25][25].sprite = 1000;
-    this.tiles[26][25].sprite = 1000;
-    this.tiles[27][25].sprite = 1000;
-    this.tiles[28][25].sprite = 1000;
-    this.tiles[29][25].sprite = 1000;
-    this.tiles[30][25].sprite = 1000;
-    this.tiles[31][25].sprite = 1000;
+    this.tiles[25][25].asset.sprite = 1000;
+    this.tiles[26][25].asset.sprite = 1000;
+    this.tiles[27][25].asset.sprite = 1000;
+    this.tiles[28][25].asset.sprite = 1000;
+    this.tiles[29][25].asset.sprite = 1000;
+    this.tiles[30][25].asset.sprite = 1000;
+    this.tiles[31][25].asset.sprite = 1000;
     // fill
-    this.tiles[25][24].sprite = 1000;
-    this.tiles[26][24].sprite = 1000;
-    this.tiles[27][24].sprite = 1000;
-    this.tiles[28][24].sprite = 1000;
-    this.tiles[29][24].sprite = 1000;
-    this.tiles[30][24].sprite = 1000;
-    this.tiles[31][24].sprite = 1000;
+    this.tiles[25][24].asset.sprite = 1000;
+    this.tiles[26][24].asset.sprite = 1000;
+    this.tiles[27][24].asset.sprite = 1000;
+    this.tiles[28][24].asset.sprite = 1000;
+    this.tiles[29][24].asset.sprite = 1000;
+    this.tiles[30][24].asset.sprite = 1000;
+    this.tiles[31][24].asset.sprite = 1000;
     // fill
-    this.tiles[25][23].sprite = 1000;
-    this.tiles[26][23].sprite = 1000;
-    this.tiles[27][23].sprite = 1000;
+    this.tiles[25][23].asset.sprite = 1000;
+    this.tiles[26][23].asset.sprite = 1000;
+    this.tiles[27][23].asset.sprite = 1000;
     // fill
-    this.tiles[25][22].sprite = 1000;
-    this.tiles[26][22].sprite = 1000;
-    this.tiles[27][22].sprite = 1000;
+    this.tiles[25][22].asset.sprite = 1000;
+    this.tiles[26][22].asset.sprite = 1000;
+    this.tiles[27][22].asset.sprite = 1000;
   }
 }

@@ -9,7 +9,7 @@ export class Engine {
   actions = [];
   temporaryActions = [];
   then = 0;
-  fpsInterval = 1000 / 34;
+  fpsInterval = 1000 / 36;
   tickCount = 0;
 
   constructor() {

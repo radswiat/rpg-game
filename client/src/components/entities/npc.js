@@ -43,7 +43,7 @@ export default class NPC extends Entity {
 
   constructor(x, y) {
     super(x, y);
-    engine.onHeartbeat(this.applyRandomWalk.bind(this));
+    //engine.onHeartbeat(this.applyRandomWalk.bind(this));
   }
 
   applyRandomWalk(tick) {

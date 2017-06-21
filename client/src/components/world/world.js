@@ -21,8 +21,7 @@ export default class World {
       }
       for(let y = 0; y < 60; y++) {
         this.tiles[x][y] = {
-          x,
-          y,
+          location: { x, y},
           asset: assets.use(assets.tiles.grass)
         }
       }
@@ -39,8 +38,7 @@ export default class World {
       for(let y = 0; y < 60; y++) {
         if (this.seed.perlin2(x / mod, y / mod) > 0.55) {
           this.objects[x][y] = {
-            x,
-            y,
+            location: { x, y},
             asset: {
               texture: 'layer1',
               sprite: this.seed.perlin2(x / mod + 10, y / mod + 10) < -0.12 ? 0 : 1,
@@ -60,7 +58,7 @@ export default class World {
       }
       for(let y = 0; y < 60; y++) {
         if (this.seed.perlin2(x / mod, y / mod) > 0.65) {
-          this.entities[x][y] = new NPC(x, y);
+          //this.entities[x][y] = new NPC(x, y);
         }
       }
     }
@@ -83,15 +81,36 @@ export default class World {
   }
 
   _tempCreateLake() {
-    // bottom
-    this.tiles[29][26].asset.sprite = 340;
-    this.tiles[30][26].asset.sprite = 340;
-    this.tiles[31][26].asset.sprite = 340;
-    // corner
-    this.tiles[32][26].asset.sprite = 346;
-    // right
-    this.tiles[32][25].asset.sprite = 344;
-    this.tiles[32][24].asset.sprite = 344;
+    // bottom right
+    // *
+    // =    *
+    // =         *
+    // ============== *
+    let bottomRight = assets.use(assets.tiles['water-holes'], {
+      sprites: 'lines.bottomRight'
+    });
+    this.tiles[29][26].asset = bottomRight;
+    this.tiles[30][26].asset = bottomRight;
+    this.tiles[31][26].asset = bottomRight;
+
+    // bottom right with right top corner
+    // *       *
+    // = *   * =
+    // = = * = =
+    this.tiles[32][26].asset = assets.use(assets.tiles['water-holes'], {
+      sprites: 'corners.bottomRightWithRightTop'
+    });
+
+    // right top
+    //                *
+    //           *    =
+    //      *         =
+    // * ==============
+    let rightTop = assets.use(assets.tiles['water-holes'], {
+      sprites: 'lines.rightTop'
+    });
+    this.tiles[32][25].asset = rightTop;
+    this.tiles[32][24].asset = rightTop;
     // corner
     this.tiles[32][23].asset.sprite = 348;
     // top

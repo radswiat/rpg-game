@@ -160,7 +160,7 @@ export default class Render {
     );
   }
 
-  renderTile({asset, x, y}) {
+  renderTile({asset, location}) {
     let spriteLocation = spritesHelper.getLocation(asset.sprite);
 
     this.layers.background.drawImage(
@@ -169,17 +169,17 @@ export default class Render {
       spriteLocation[1],
       64,
       32,
-      ...this.camera.handleCoordsLocation(x, y),
+      ...this.camera.handleCoordsLocation(location.x, location.y),
       64,
       32
     );
 
     // debugging
-    // let dLocations = this.camera.handleCoordsLocation(x, y);
-    // this.layers.background.fillText(`${x}:${y}`, dLocations[0] -10, dLocations[1] + 3);
+    let dLocations = this.camera.handleCoordsLocation(location.x, location.y);
+    this.layers.background.fillText(`${location.x}:${location.y}`, dLocations[0] + 22, dLocations[1] + 18);
   }
 
-  renderObject({asset, x, y}) {
+  renderObject({asset, location}) {
     let spriteLocation;
     let spriteSize;
     if (asset.sprite === 0) {
@@ -193,7 +193,7 @@ export default class Render {
       this.textures[asset.texture],
       ...spriteLocation,
       ...spriteSize,
-      ...this.camera.handleCoordsLocation(x, y),
+      ...this.camera.handleCoordsLocation(location.x, location.y),
       ...spriteSize,
     );
   }
@@ -205,6 +205,18 @@ export default class Render {
       ...spriteSize,
       ...this.camera.handleCoordsLocation(x, y, spriteFix),
       ...spriteSize,
+    );
+
+    spriteLocation = [455, 368];
+    this.layers.background.drawImage(
+      this.textures['layer0'],
+      spriteLocation[0],
+      spriteLocation[1],
+      64,
+      32,
+      ...this.camera.handleCoordsLocation(x, y),
+      64,
+      32
     );
   }
 

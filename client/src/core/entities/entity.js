@@ -31,15 +31,21 @@ export default class Entities {
       return;
     }
 
+    let isWalkingX = this.isWalkingX;
+    let isWalkingY = this.isWalkingY;
+
+    console.warn(`current: ${this.x}:${this.y}`);
+    console.warn(`moving to: ${this.x - ( 1 * isWalkingX)}:${this.y - ( 1 * isWalkingY)}`);
+
+
     // can move?
-    if (!game.canMove(this.x + 1, this.y + 1)) {
+    if (!game.canMove(this.x - ( 1 * isWalkingX), this.y - ( 1 * isWalkingY))) {
       console.log('cant move');
       return;
     }
 
     this.isWalkingSequence = true;
-    let isWalkingX = this.isWalkingX;
-    let isWalkingY = this.isWalkingY;
+
     let animationType = this.animationType;
 
     engine.tillEnd((tick) => {

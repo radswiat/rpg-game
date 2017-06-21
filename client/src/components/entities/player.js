@@ -13,7 +13,7 @@ export default class Player extends Entity {
   static spriteSize = [36, 56];
 
   // sprite fix ( render align )
-  static spriteFix = [15, 0];
+  static spriteFix = [15, -35];
 
   // animation states
   static animationStates = {

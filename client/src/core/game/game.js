@@ -18,12 +18,10 @@ export class Game {
   _setWalkableGrid() {
     this.walkableGrid = this.world.tiles.map((o) => {
       return o.map((tile) => {
-        return tile.isWalkable || true;
+        return tile.asset.walkable;
       });
     });
-
-    // console.warn(this.world.fluids);
-    // console.log(this.walkableGrid);
+    console.warn(this.walkableGrid);
   }
 
   addMouseListener() {
@@ -40,7 +38,7 @@ export class Game {
 
   canMove(x, y) {
     console.warn(x, y);
-    return false;
+    return this.walkableGrid[x][y];
   }
 
   start() {

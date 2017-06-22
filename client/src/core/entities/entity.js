@@ -8,13 +8,11 @@ export default class Entities {
   walkSequence = 0;
   isWalking = false;
 
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
+  constructor({ location }) {
+    this.location = location;
     this.texture = this.constructor.texture;
-    this.spriteLocation = this.constructor.spriteLocation;
-    this.spriteSize = this.constructor.spriteSize;
-    this.spriteFix = this.constructor.spriteFix;
+    this.layer = 'objects';
+    this.sprites = this.constructor.sprites;
     engine.onHeartbeat(this._walk.bind(this));
   }
 
@@ -36,7 +34,7 @@ export default class Entities {
 
     // collision check
     // can entity move into new location ?
-    if (!game.canMove(this.x - ( 1 * isWalkingX), this.y - ( 1 * isWalkingY))) {
+    if (!game.canMove(this.location.x - ( 1 * isWalkingX), this.location.y - ( 1 * isWalkingY))) {
       return;
     }
 
@@ -49,13 +47,13 @@ export default class Entities {
         if (this.walkSequence > 6) {
           this.walkSequence = 0;
           this.isWalkingSequence = false;
-          this.x = Math.round(this.x);
-          this.y = Math.round(this.y);
+          this.location.x = Math.round(this.location.x);
+          this.location.y = Math.round(this.location.y);
           return true;
         }
-        this.x = this.x - ( (1 / 7) * isWalkingX);
-        this.y = this.y - ( (1 / 7) * isWalkingY);
-        this.spriteLocation = this.constructor.animationStates[animationType][this.walkSequence];
+        this.location.x = this.location.x - ( (1 / 7) * isWalkingX);
+        this.location.y = this.location.y - ( (1 / 7) * isWalkingY);
+        this.sprites.location = this.constructor.animationStates[animationType][this.walkSequence];
         this.walkSequence++;
       }
     });

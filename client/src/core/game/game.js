@@ -16,12 +16,20 @@ export class Game {
   }
 
   _setWalkableGrid() {
-    // this.walkableGrid = this.world.grid.map((o) => {
-    //   return o.map((tile) => {
-    //     return tile.asset.walkable;
-    //   });
-    // });
-    // console.warn(this.walkableGrid);
+    this.walkableGrid = this.world.grid.map((o) => {
+      return o.map((tile) => {
+        let walkable = true;
+        // if all walkable, set as walkable
+        tile.map((object) => {
+          if (!object.walkable) {
+            walkable = false;
+          }
+        });
+        return walkable;
+      });
+    });
+    console.error('walkable');
+    console.warn(this.walkableGrid);
   }
 
   addMouseListener() {

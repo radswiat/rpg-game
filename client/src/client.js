@@ -62,7 +62,9 @@ class App {
   }
 
   addPlayerCharacter() {
-    // this.world.objects[30][30] = new Player(30, 30);
+    this.world.grid[30][30].push(new Player({
+      location: { x: 30, y: 30 }
+    }))
   }
 
   /**

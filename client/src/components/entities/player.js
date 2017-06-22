@@ -6,14 +6,14 @@ export default class Player extends Entity {
   // texture used by entity
   static texture = 'playerbody2';
 
-  // sprite location ( png coords )
-  static spriteLocation = [154, 283];
-
-  // sprite size ( render size )
-  static spriteSize = [36, 56];
-
-  // sprite fix ( render align )
-  static spriteFix = [15, -35];
+  static sprites = {
+    // sprite location ( png coords )
+    location: [154, 283],
+    // sprite size ( render size )
+    size: [36, 56],
+    // sprite fix ( render align )
+    fix: [15, -35]
+  };
 
   // animation states
   static animationStates = {
@@ -39,8 +39,8 @@ export default class Player extends Entity {
     ],
   };
 
-  constructor(x, y) {
-    super(x, y);
+  constructor({ location }) {
+    super({ location });
     this.bindControls();
   }
 

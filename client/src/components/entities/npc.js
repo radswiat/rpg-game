@@ -1,7 +1,7 @@
 import Entity from 'core/entities/entity';
 const inputs = require('game-inputs')( window );
-import engine from 'core/engine/engine';
 import { every } from 'core/utils/utils';
+import engine from 'core/engine/engine';
 
 export default class NPC extends Entity {
 
@@ -43,7 +43,7 @@ export default class NPC extends Entity {
 
   constructor(x, y) {
     super(x, y);
-    //engine.onHeartbeat(this.applyRandomWalk.bind(this));
+    engine.onHeartbeat(this.applyRandomWalk.bind(this));
   }
 
   applyRandomWalk(tick) {

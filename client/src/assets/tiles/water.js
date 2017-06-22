@@ -5,7 +5,7 @@ let sequence = 0;
 let direction = 1;
 
 export default {
-  walkable: false,
+  walkable: true, // water is under every single tilset! it has to be set as walkable!
   layer: 'background',
   texture: 'layer0',
   singleton: true,

@@ -2,6 +2,7 @@ import clone from 'lodash/cloneDeep';
 import get from 'lodash/get';
 import { getSpriteByIndex } from 'core/helpers/sprites';
 import engine from 'core/engine/engine';
+import Tile from './tile';
 
 export class Assets {
 
@@ -30,13 +31,17 @@ export class Assets {
       asset.initialized = true;
     }
 
+    // if sprite location is a function
     if (typeof asset.sprites.location === 'function') {
       asset.sprites.location = asset.sprites.location();
     }
 
+    if (params.location) {
+      asset.location = params.location;
+    }
+
     // events
     if (typeof asset.onHeartbeat === 'function') {
-      console.warn('register!!!!!!!!!!!!!!!!!!!!!');
       engine.onHeartbeat(asset.onHeartbeat.bind(this, asset));
     }
 
@@ -47,7 +52,7 @@ export class Assets {
       console.warn(asset);
     }
 
-    return asset;
+    return new Tile(asset);
   }
 
   /**

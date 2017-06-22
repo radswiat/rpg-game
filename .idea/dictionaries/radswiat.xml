@@ -2,6 +2,7 @@
   <dictionary name="radswiat">
     <words>
       <w>coords</w>
+      <w>tilset</w>
     </words>
   </dictionary>
 </component>

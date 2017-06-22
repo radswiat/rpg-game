@@ -22,7 +22,7 @@ let BASE_PATH = './';
 let PUBLIC_PATH = '';
 
 const WebpackConfig = {
-  devtool: 'eval',
+  devtool: 'source-map',
   context: __dirname,
   entry: {
     index: [

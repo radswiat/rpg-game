@@ -34,13 +34,9 @@ export default class Entities {
     let isWalkingX = this.isWalkingX;
     let isWalkingY = this.isWalkingY;
 
-    console.warn(`current: ${this.x}:${this.y}`);
-    console.warn(`moving to: ${this.x - ( 1 * isWalkingX)}:${this.y - ( 1 * isWalkingY)}`);
-
-
-    // can move?
+    // collision check
+    // can entity move into new location ?
     if (!game.canMove(this.x - ( 1 * isWalkingX), this.y - ( 1 * isWalkingY))) {
-      console.log('cant move');
       return;
     }
 

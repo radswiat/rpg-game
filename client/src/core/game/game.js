@@ -37,7 +37,6 @@ export class Game {
   }
 
   canMove(x, y) {
-    console.warn(x, y);
     return this.walkableGrid[x][y];
   }
 

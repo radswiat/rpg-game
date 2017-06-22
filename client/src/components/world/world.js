@@ -89,17 +89,6 @@ export default class World {
     let bottomRight = assets.use(assets.tiles['water-holes'], {
       sprites: 'lines.bottomRight'
     });
-    this.tiles[29][26].asset = bottomRight;
-    this.tiles[30][26].asset = bottomRight;
-    this.tiles[31][26].asset = bottomRight;
-
-    // bottom right with right top corner
-    // *       *
-    // = *   * =
-    // = = * = =
-    this.tiles[32][26].asset = assets.use(assets.tiles['water-holes'], {
-      sprites: 'corners.bottomRightWithRightTop'
-    });
 
     // right top
     //                *
@@ -109,61 +98,98 @@ export default class World {
     let rightTop = assets.use(assets.tiles['water-holes'], {
       sprites: 'lines.rightTop'
     });
+
+    let topLeft = assets.use(assets.tiles['water-holes'], {
+      sprites: 'lines.topLeft'
+    });
+
+    let topRight = assets.use(assets.tiles['water-holes'], {
+      sprites: 'lines.topRight'
+    });
+
+    // right top with top left corner
+    // * = = =
+    //    *  =
+    //       *
+    //    *  =
+    // * = = =
+    let rightTopWithTopLeft = assets.use(assets.tiles['water-holes'], {
+      sprites: 'corners.rightTopWithTopLeft'
+    });
+
+    // bottom right with right top corner
+    // *       *
+    // = *   * =
+    // = = * = =
+    let bottomRightWithRightTop = assets.use(assets.tiles['water-holes'], {
+      sprites: 'corners.bottomRightWithRightTop'
+    });
+
+    let leftBottomWithTopLeft = assets.use(assets.tiles['water-holes'], {
+      sprites: 'corners.leftBottomWithTopLeft'
+    });
+
+    let leftBottomWithBottomRight = assets.use(assets.tiles['water-holes'], {
+      sprites: 'corners.leftBottomWithBottomRight'
+    });
+
+    let innerCornersLeft = assets.use(assets.tiles['water-holes'], {
+      sprites: 'innerCorners.left'
+    });
+
+    let blank = assets.use(assets.tiles['water-holes'], {
+      sprites: 'blank'
+    });
+
+    this.tiles[29][26].asset = bottomRight;
+    this.tiles[30][26].asset = bottomRight;
+    this.tiles[31][26].asset = bottomRight;
+    this.tiles[32][26].asset = bottomRightWithRightTop;
     this.tiles[32][25].asset = rightTop;
     this.tiles[32][24].asset = rightTop;
-    // corner
-    this.tiles[32][23].asset.sprite = 348;
-    // top
-    this.tiles[31][23].asset.sprite = 334;
-    this.tiles[30][23].asset.sprite = 334;
-    this.tiles[29][23].asset.sprite = 334;
-    // inner corner
-    this.tiles[28][23].asset.sprite = 349;
-    // right
-    this.tiles[28][22].asset.sprite = 344;
-    // corner
-    this.tiles[28][21].asset.sprite = 348;
-    // top
-    this.tiles[27][21].asset.sprite = 334;
-    this.tiles[26][21].asset.sprite = 334;
-    this.tiles[25][21].asset.sprite = 334;
-    // corner
-    this.tiles[24][21].asset.sprite = 345;
-    // left-top
-    this.tiles[24][22].asset.sprite = 337;
-    this.tiles[24][23].asset.sprite = 337;
-    this.tiles[24][24].asset.sprite = 337;
-    this.tiles[24][25].asset.sprite = 337;
-    // corner
-    this.tiles[24][26].asset.sprite = 347;
-    // bottom
-    this.tiles[25][26].asset.sprite = 340;
-    this.tiles[26][26].asset.sprite = 340;
-    this.tiles[27][26].asset.sprite = 340;
-    this.tiles[28][26].asset.sprite = 340;
+    this.tiles[32][23].asset = rightTopWithTopLeft;
+    this.tiles[31][23].asset = topLeft;
+    this.tiles[30][23].asset = topLeft;
+    this.tiles[29][23].asset = topLeft;
+    this.tiles[28][23].asset = innerCornersLeft
+    this.tiles[28][22].asset = rightTop;
+    this.tiles[28][21].asset = rightTopWithTopLeft;
+    this.tiles[27][21].asset = topLeft;
+    this.tiles[26][21].asset = topLeft;
+    this.tiles[25][21].asset = topLeft;
+    this.tiles[24][21].asset = leftBottomWithTopLeft;
+    this.tiles[24][22].asset = topRight;
+    this.tiles[24][23].asset = topRight;
+    this.tiles[24][24].asset = topRight;
+    this.tiles[24][25].asset = topRight;
+    this.tiles[24][26].asset = leftBottomWithBottomRight;
+    this.tiles[25][26].asset = bottomRight;
+    this.tiles[26][26].asset = bottomRight;
+    this.tiles[27][26].asset = bottomRight;
+    this.tiles[28][26].asset = bottomRight;
     // fill
-    this.tiles[25][25].asset.sprite = 1000;
-    this.tiles[26][25].asset.sprite = 1000;
-    this.tiles[27][25].asset.sprite = 1000;
-    this.tiles[28][25].asset.sprite = 1000;
-    this.tiles[29][25].asset.sprite = 1000;
-    this.tiles[30][25].asset.sprite = 1000;
-    this.tiles[31][25].asset.sprite = 1000;
+    this.tiles[25][25].asset = blank;
+    this.tiles[26][25].asset = blank;
+    this.tiles[27][25].asset = blank;
+    this.tiles[28][25].asset = blank;
+    this.tiles[29][25].asset = blank;
+    this.tiles[30][25].asset = blank;
+    this.tiles[31][25].asset = blank;
     // fill
-    this.tiles[25][24].asset.sprite = 1000;
-    this.tiles[26][24].asset.sprite = 1000;
-    this.tiles[27][24].asset.sprite = 1000;
-    this.tiles[28][24].asset.sprite = 1000;
-    this.tiles[29][24].asset.sprite = 1000;
-    this.tiles[30][24].asset.sprite = 1000;
-    this.tiles[31][24].asset.sprite = 1000;
+    this.tiles[25][24].asset = blank;
+    this.tiles[26][24].asset = blank;
+    this.tiles[27][24].asset = blank;
+    this.tiles[28][24].asset = blank;
+    this.tiles[29][24].asset = blank;
+    this.tiles[30][24].asset = blank;
+    this.tiles[31][24].asset = blank;
     // fill
-    this.tiles[25][23].asset.sprite = 1000;
-    this.tiles[26][23].asset.sprite = 1000;
-    this.tiles[27][23].asset.sprite = 1000;
+    this.tiles[25][23].asset = blank;
+    this.tiles[26][23].asset = blank;
+    this.tiles[27][23].asset = blank;
     // fill
-    this.tiles[25][22].asset.sprite = 1000;
-    this.tiles[26][22].asset.sprite = 1000;
-    this.tiles[27][22].asset.sprite = 1000;
+    this.tiles[25][22].asset = blank;
+    this.tiles[26][22].asset = blank;
+    this.tiles[27][22].asset = blank;
   }
 }

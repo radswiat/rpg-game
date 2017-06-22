@@ -4,12 +4,10 @@ import 'resources/scss/main.scss';
 import game from 'core/game/game';
 import assets from 'assets/assets';
 
-
 import { IsometricCamera } from 'core/camera/camera';
-
 import Player from 'components/entities/player';
-
 import World from 'components/world/world';
+
 
 /**
  * Main game class
@@ -79,10 +77,10 @@ class App {
     game.setWorld(this.world);
     game.start();
   }
+
 }
 
 if(module.hot) {
   App.createGame(51);
   module.hot.accept();
 }
-

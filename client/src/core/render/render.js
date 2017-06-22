@@ -175,8 +175,8 @@ export default class Render {
     );
 
     // debugging
-    let dLocations = this.camera.handleCoordsLocation(location.x, location.y);
-    this.layers.background.fillText(`${location.x}:${location.y}`, dLocations[0] + 22, dLocations[1] + 18);
+    // let dLocations = this.camera.handleCoordsLocation(location.x, location.y);
+    // this.layers.background.fillText(`${location.x}:${location.y}`, dLocations[0] + 22, dLocations[1] + 18);
   }
 
   renderObject({asset, location}) {

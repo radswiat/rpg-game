@@ -1,11 +1,11 @@
 import { loadImage } from 'core/utils/utils';
-import spritesHelper from 'core/helpers/sprites';
 
 import Layer from './layer';
 
 export default class Render {
 
   textures = {};
+  events = {};
 
   constructor({ camera }) {
     this.camera = camera;
@@ -32,13 +32,13 @@ export default class Render {
   _initializeLayers() {
     let background = new Layer('background');
     background.enableSmooth();
-    let entities = new Layer('entities');
-    entities.enableSmooth();
+    let objects = new Layer('objects');
+    objects.enableSmooth();
     let foreground = new Layer('foreground');
     foreground.enableSmooth();
     this.layers = {
       background: background.ctx(),
-      entities: entities.ctx(),
+      objects: objects.ctx(),
       foreground: foreground.ctx()
     };
   }
@@ -105,23 +105,25 @@ export default class Render {
 
   renderClear() {
     this.layers.background.clearRect(0, 0, window.innerWidth, window.innerHeight);
-    this.layers.entities.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    this.layers.objects.clearRect(0, 0, window.innerWidth, window.innerHeight);
     this.layers.foreground.clearRect(0, 0, window.innerWidth, window.innerHeight);
   }
 
   renderWorld(world, mouse) {
 
     // render fluids
-    world.fluids.map((o) => {
-      o.map((fluidTile) => {
-        this.renderFluid(fluidTile);
-      })
-    });
+    // world.fluids.map((o) => {
+    //   o.map((fluidTile) => {
+    //     this.renderFluid(fluidTile);
+    //   })
+    // });
 
     // render tiles
-    world.tiles.map((o) => {
-      o.map((tile) => {
-        this.renderTile(tile);
+    world.grid.map((o) => {
+      o.map((tiles) => {
+        tiles.map((tile) => {
+          this.renderTile(tile);
+        });
       })
     });
 
@@ -131,18 +133,18 @@ export default class Render {
     }
 
     // render objects
-    world.objects.map((o) => {
-      o.map((object) => {
-        this.renderObject(object)
-      });
-    });
+    // world.objects.map((o) => {
+    //   o.map((object) => {
+    //     this.renderObject(object)
+    //   });
+    // });
 
     // render entities
-    world.entities.map((o) => {
-      o.map((entity) => {
-        this.renderEntity(entity)
-      });
-    });
+    // world.objects.map((o) => {
+    //   o.map((object) => {
+    //     this.renderObjects(object)
+    //   });
+    // });
   }
 
   renderFluid({object, x, y}) {
@@ -161,17 +163,12 @@ export default class Render {
   }
 
   renderTile({asset, location}) {
-    let spriteLocation = spritesHelper.getLocation(asset.sprite);
-
-    this.layers.background.drawImage(
+    this.layers[asset.layer].drawImage(
       this.textures[asset.texture],
-      spriteLocation[0],
-      spriteLocation[1],
-      64,
-      32,
+      ...asset.sprites.location,
+      ...asset.sprites.size,
       ...this.camera.handleCoordsLocation(location.x, location.y),
-      64,
-      32
+      ...asset.sprites.size
     );
 
     // debugging
@@ -179,7 +176,7 @@ export default class Render {
     // this.layers.background.fillText(`${location.x}:${location.y}`, dLocations[0] + 22, dLocations[1] + 18);
   }
 
-  renderObject({asset, location}) {
+  renderObjects({asset, location}) {
     let spriteLocation;
     let spriteSize;
     if (asset.sprite === 0) {

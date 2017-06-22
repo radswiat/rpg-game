@@ -61,9 +61,8 @@ class App {
     this.world = new World(this.seed);
   }
 
-
   addPlayerCharacter() {
-    this.world.entities[30][30] = new Player(30, 30);
+    // this.world.objects[30][30] = new Player(30, 30);
   }
 
   /**

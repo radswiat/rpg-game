@@ -1,29 +1,16 @@
-import clone from 'lodash/clone';
+import clone from 'lodash/cloneDeep';
 import get from 'lodash/get';
+import { getSpriteByIndex } from 'core/helpers/sprites';
+import engine from 'core/engine/engine';
 
 export class Assets {
 
   tiles = {};
+  objects = {};
 
   async initialize() {
-    await this.loadTiles();
-  }
-
-  /**
-   * Load tiles
-   * - uses webpack to find all files
-   * @returns {Promise.<void>}
-   */
-  async loadTiles() {
-    (async (context) => {
-      let keys = context.keys();
-      for (let path of keys) {
-        let assetName = path.replace(/(.\/)/g, '').replace(/(\.js)/, '');
-        path = path.replace(/(.\/)/g, '');
-        this.tiles[assetName] = require(`./tiles/${path}`).default;
-      }
-      console.warn(this.tiles);
-    })(require.context('../assets/tiles', true, /\.js/));
+    await this._loadTiles();
+    await this._loadObjects();
   }
 
   /**
@@ -34,17 +21,79 @@ export class Assets {
    * @returns {*}
    */
   use(asset, params = {}) {
-    asset = clone(asset);
-    if (typeof asset.sprite === 'function') {
-      asset.sprite = asset.sprite();
+    if (!asset.singleton) {
+      asset = clone(asset);
+    } else {
+      if (asset.initialized) {
+        return asset;
+      }
+      asset.initialized = true;
     }
 
-    if (params.sprites) {
-      asset.sprite = get(asset.sprites, params.sprites);
+    if (typeof asset.sprites.location === 'function') {
+      asset.sprites.location = asset.sprites.location();
+    }
+
+    // events
+    if (typeof asset.onHeartbeat === 'function') {
+      console.warn('register!!!!!!!!!!!!!!!!!!!!!');
+      engine.onHeartbeat(asset.onHeartbeat.bind(this, asset));
+    }
+
+    if (params.spriteLocation) {
+      asset.sprites.location = getSpriteByIndex(
+        get(asset.sprites.locations, params.spriteLocation)
+      );
+      console.warn(asset);
     }
 
     return asset;
   }
+
+  /**
+   * Load tiles
+   * - uses webpack to find all files
+   * @returns {Promise.<void>}
+   */
+  async _loadTiles() {
+    let context = require.context('../assets/tiles', true, /\.js/)
+    return this._loadAssets(context, {
+      prefix: 'tiles',
+      path: 'tiles'
+    });
+  }
+
+  /**
+   * Load tiles
+   * - uses webpack to find all files
+   * @returns {Promise.<void>}
+   */
+  async _loadObjects() {
+    let context = require.context('../assets/objects', true, /\.js/)
+    return this._loadAssets(context, {
+      prefix: 'objects',
+      path: 'objects'
+    });
+  }
+
+  /**
+   * Load assets
+   * @param context
+   * @param prefix
+   * @param path
+   * @returns {Promise.<void>}
+   * @private
+   */
+  async _loadAssets(context, { prefix, path }) {
+    let keys = context.keys();
+    for (let webpackPath of keys) {
+      let assetName = webpackPath.replace(/(.\/)/g, '').replace(/(\.js)/, '');
+      webpackPath = webpackPath.replace(/(.\/)/g, '');
+      this[prefix][assetName] = require(`./${path}/${webpackPath}`).default;
+    }
+    console.warn(this[prefix]);
+  }
+
 }
 
 export default new Assets();

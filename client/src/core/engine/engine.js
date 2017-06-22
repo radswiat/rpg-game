@@ -44,6 +44,7 @@ export class Engine {
   _tick() {
     stats.begin();
     let tickCount = this.tickCount++;
+    document.getElementById('debug_heartbeats').innerHTML = this.actions.length;
     for (let action of this.actions) {
       action(tickCount);
     }

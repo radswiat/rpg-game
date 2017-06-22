@@ -16,24 +16,24 @@ export class Game {
   }
 
   _setWalkableGrid() {
-    this.walkableGrid = this.world.tiles.map((o) => {
-      return o.map((tile) => {
-        return tile.asset.walkable;
-      });
-    });
-    console.warn(this.walkableGrid);
+    // this.walkableGrid = this.world.grid.map((o) => {
+    //   return o.map((tile) => {
+    //     return tile.asset.walkable;
+    //   });
+    // });
+    // console.warn(this.walkableGrid);
   }
 
   addMouseListener() {
-    this.render.onEvent('mousemove', ({ x, y }) => {
-      if (typeof this.world.tiles[x] !== 'undefined') {
-        if (typeof this.world.tiles[x][y] !== 'undefined') {
-          this.mouseTile = {
-            x, y
-          };
-        }
-      }
-    })
+    // this.render.onEvent('mousemove', ({ x, y }) => {
+    //   if (typeof this.world.tiles[x] !== 'undefined') {
+    //     if (typeof this.world.tiles[x][y] !== 'undefined') {
+    //       this.mouseTile = {
+    //         x, y
+    //       };
+    //     }
+    //   }
+    // })
   }
 
   canMove(x, y) {

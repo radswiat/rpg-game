@@ -3,10 +3,10 @@ import { getSpriteByIndex } from 'core/helpers/sprites';
 
 export default {
   walkable: true,
-  layer: 'background',
-  texture: 'layer0',
+  layer: 'objects',
+  texture: 'layer1',
   sprites: {
-    size: [64, 32],
-    location: () => getSpriteByIndex(randomRange(408, 420))
+    size: [168, 207],
+    location: [412, 0]
   }
 }

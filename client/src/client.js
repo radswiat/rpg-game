@@ -2,12 +2,7 @@ import Render from 'core/render/render';
 import { Noise } from 'noisejs';
 import 'resources/scss/main.scss';
 import game from 'core/game/game';
-import assets from 'assets/assets';
-
-import { IsometricCamera } from 'core/camera/camera';
-import Player from 'components/entities/player';
-import World from 'components/world/world';
-
+import { getSpriteByIndex } from 'core/helpers/sprites';
 
 /**
  * Main game class
@@ -29,9 +24,7 @@ class App {
 
   async initialize() {
     await this.initializeComponents();
-    await assets.initialize();
     this.initializeWorld();
-    this.addPlayerCharacter();
     this.startGame();
   }
 
@@ -40,14 +33,7 @@ class App {
    * @returns {Promise.<void>}
    */
   async initializeComponents() {
-    this.camera = new IsometricCamera({
-      x: 600,
-      y: -400
-    });
-
-    this.render = new Render({
-      camera: this.camera
-    });
+    this.render = new Render();
     await this.render.initialize();
   }
 
@@ -58,13 +44,7 @@ class App {
    * - entities
    */
   initializeWorld() {
-    this.world = new World(this.seed);
-  }
 
-  addPlayerCharacter() {
-    this.world.grid[30][30].push(new Player({
-      location: { x: 30, y: 30 }
-    }))
   }
 
   /**
@@ -73,9 +53,8 @@ class App {
    * - register every frame action
    */
   startGame() {
-    game.setCamera(this.camera);
+    game.setWorld(this.grid);
     game.setRender(this.render);
-    game.setWorld(this.world);
     game.start();
   }
 

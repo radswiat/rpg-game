@@ -2,30 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b82e8597-8576-4730-b99a-1cb484cfa711" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/src/resources/textures/indoor.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/src/resources/textures/sample.png" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/src/assets/assets.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/src/assets/helpers.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/src/assets/objects/tree.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/src/assets/tile.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/src/assets/tiles/grass.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/src/assets/tiles/water-holes.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/src/assets/tiles/water.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/src/components/entities/npc.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/src/components/entities/player.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/src/components/tiles/water.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/src/components/world/world.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/src/core/camera/camera.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/src/core/camera/comp/2d-camera.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/src/core/camera/comp/isometric-camera.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/src/core/entities/entity.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/radswiat.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/radswiat.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/client.js" afterPath="$PROJECT_DIR$/client/src/client.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/core/game/game.js" afterPath="$PROJECT_DIR$/client/src/core/game/game.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/core/helpers/sprites.js" afterPath="$PROJECT_DIR$/client/src/core/helpers/sprites.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/core/render/render.js" afterPath="$PROJECT_DIR$/client/src/core/render/render.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -43,8 +20,8 @@
       <file leaf-file-name="client.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/src/client.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="46" column="0" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+            <state relative-caret-position="198">
+              <caret line="47" column="3" lean-forward="false" selection-start-line="47" selection-start-column="3" selection-end-line="47" selection-end-column="3" />
               <folding>
                 <element signature="e#0#40#0" expanded="true" />
               </folding>
@@ -56,7 +33,7 @@
         <entry file="file://$PROJECT_DIR$/client/src/core/render/render.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="468">
-              <caret line="72" column="0" lean-forward="true" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+              <caret line="72" column="0" lean-forward="false" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
               <folding>
                 <element signature="e#0#45#0" expanded="true" />
               </folding>
@@ -435,7 +412,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="75771000" />
+    <option name="totallyTimeSpent" value="76087000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -870,7 +847,7 @@
     <entry file="file://$PROJECT_DIR$/client/src/core/render/render.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="468">
-          <caret line="72" column="0" lean-forward="true" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+          <caret line="72" column="0" lean-forward="false" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
           <folding>
             <element signature="e#0#45#0" expanded="true" />
           </folding>
@@ -879,8 +856,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/src/client.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="46" column="0" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+        <state relative-caret-position="198">
+          <caret line="47" column="3" lean-forward="false" selection-start-line="47" selection-start-column="3" selection-end-line="47" selection-end-column="3" />
           <folding>
             <element signature="e#0#40#0" expanded="true" />
           </folding>

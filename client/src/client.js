@@ -44,7 +44,19 @@ class App {
    * - entities
    */
   initializeWorld() {
-
+    this.grid = [];
+    for (let x = 0; x < 60; x++) {
+      if (typeof this.grid[x] === 'undefined') {
+        this.grid[x] = [];
+      }
+      for(let y = 0; y < 60; y++) {
+        this.grid[x][y] = {
+          texture: 'indoor',
+          spriteLocation: [40, 0],
+          spriteSize: [40, 40]
+        }
+      }
+    }
   }
 
   /**
@@ -64,3 +76,11 @@ if(module.hot) {
   App.createGame(51);
   module.hot.accept();
 }
+
+//
+// [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+// [
+//   [0, 0, 0],
+//   [0, 0, 0],
+//   [0, 0, 0]
+//   ]

@@ -66,11 +66,21 @@ export default class Render {
   }
 
   renderWorld(world) {
-
+    world.map((arr, x) => {
+      arr.map((tile, y) => {
+        this.renderTile(tile, x, y)
+      })
+    })
   }
 
-  renderTile({ layer, texture, sprites }, index) {
-
+  renderTile({ texture, spriteLocation, spriteSize, location }, x, y) {
+    this.layers.background.drawImage(
+      this.textures[texture],
+      ...spriteLocation,
+      ...spriteSize,
+      ...[x * spriteSize[0], y * spriteSize[1]],
+      ...spriteSize
+    );
   }
 
 }

@@ -6,6 +6,10 @@ export class Game {
     this.world = world;
   }
 
+  setEntities(entities) {
+    this.entities = entities;
+  }
+
   setRender(render) {
     this.render = render;
   }
@@ -14,6 +18,7 @@ export class Game {
     engine.onHeartbeat(() => {
       this.render.renderClear();
       this.render.renderWorld(this.world);
+      this.render.renderEntities(this.entities);
     });
   }
 }

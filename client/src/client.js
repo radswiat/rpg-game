@@ -9,6 +9,9 @@ import { getSpriteByIndex } from 'core/helpers/sprites';
  */
 class App {
 
+  x = 0;
+  y = 0;
+
   /**
    * Game static constructor
    * @param gameSeed
@@ -25,6 +28,8 @@ class App {
   async initialize() {
     await this.initializeComponents();
     this.initializeWorld();
+    this.initializePlayer();
+    this.movePlayer();
     this.startGame();
   }
 
@@ -52,11 +57,29 @@ class App {
       for(let y = 0; y < 60; y++) {
         this.grid[x][y] = {
           texture: 'indoor',
-          spriteLocation: [40, 0],
+          spriteLocation: [0, 0],
           spriteSize: [40, 40]
         }
       }
     }
+  }
+
+  initializePlayer() {
+    this.player = {
+      texture: 'indoor',
+      spriteLocation: [40, 40],
+      spriteSize: [40, 40],
+      location: [this.x, this.y]
+    }
+  }
+
+  movePlayer() {
+    this.x += 1;
+    this.y += 1;
+    setTimeout(() => {
+      this.player.location = [this.x, this.y];
+      this.movePlayer();
+    }, 500);
   }
 
   /**
@@ -66,6 +89,7 @@ class App {
    */
   startGame() {
     game.setWorld(this.grid);
+    game.setEntities(this.player);
     game.setRender(this.render);
     game.start();
   }
@@ -76,11 +100,3 @@ if(module.hot) {
   App.createGame(51);
   module.hot.accept();
 }
-
-//
-// [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-// [
-//   [0, 0, 0],
-//   [0, 0, 0],
-//   [0, 0, 0]
-//   ]

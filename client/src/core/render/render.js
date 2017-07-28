@@ -1,6 +1,10 @@
 import { loadImage } from 'core/utils/utils';
-
+import Camera from 'core/camera/camera';
 import Layer from './layer';
+
+let pos = 0;
+
+let camera = new Camera();
 
 export default class Render {
 
@@ -65,20 +69,29 @@ export default class Render {
 
   }
 
+  renderEntities(entities) {
+    this.renderTile(entities, entities.location[0], entities.location[1]);
+  }
+
   renderWorld(world) {
     world.map((arr, x) => {
       arr.map((tile, y) => {
         this.renderTile(tile, x, y)
       })
-    })
+    });
   }
 
-  renderTile({ texture, spriteLocation, spriteSize, location }, x, y) {
+  renderTile({ texture, spriteLocation, spriteSize }, x, y) {
+
+    let location = camera.calculate(x, y);
+
     this.layers.background.drawImage(
       this.textures[texture],
       ...spriteLocation,
       ...spriteSize,
-      ...[x * spriteSize[0], y * spriteSize[1]],
+      ...location
+      ///
+    //...[x * spriteSize[0], y * spriteSize[1]],
       ...spriteSize
     );
   }
